@@ -1,7 +1,7 @@
 
 .article {
     width: auto;
-    padding-left: 70px;
+    padding-left: 110px;
     margin: 10px;
     position: relative;
     margin-bottom: 40px;
@@ -19,14 +19,14 @@
     position: absolute;
     width: 30px;
     height: 15px;
-    left: 30px;
+    left: 50px;
     top: 29px;
     align-self: center;
 }
 
 img {
     position: absolute;
-    left: 35px;
+    left: 55px;
     top: 15px;
 }
 
@@ -43,8 +43,24 @@ a {
     margin-top: 5px;
 }
 
-button {
+/*button {
     margin: 16px;
+}*/
+
+.header {
+    margin: 16px;
+    margin-bottom: 50px;
+}
+
+.new-post {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.modify {
+    margin-right: 16px;
+    margin-top: 16px;
 }
 
 .post-form-container {
