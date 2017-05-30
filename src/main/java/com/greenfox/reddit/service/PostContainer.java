@@ -35,6 +35,7 @@ public class PostContainer {
 
   public Post add(Post post) {
     post.setOwner(session.getUserName());
+    post.setTitle(post.getTitle().replaceAll("[:;./]" , ""));
     postRepository.save(post);
     return post;
   }
@@ -43,6 +44,7 @@ public class PostContainer {
     User tempUser = userRepository.findOneByName(session.getUserName());
     ArrayList<Long> votes = tempUser.getVotes();
     Post toUpVote = postRepository.findOneById(id);
+    toUpVote.setTitle(toUpVote.getTitle().replaceAll("[:;./]" , ""));
     if (votes.contains(id)) {
     } else if (votes.contains(-id)) {
       toUpVote.incScore();
@@ -63,6 +65,7 @@ public class PostContainer {
     User tempUser = userRepository.findOneByName(session.getUserName());
     ArrayList<Long> votes = tempUser.getVotes();
     Post toDownVote = postRepository.findOneById(id);
+    toDownVote.setTitle(toDownVote.getTitle().replaceAll("[:;./]" , ""));
     if (votes.contains(-id)) {
     } else if (votes.contains(id)) {
       toDownVote.decScore();
