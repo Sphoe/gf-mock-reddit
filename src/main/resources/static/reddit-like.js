@@ -1,7 +1,8 @@
 var classNumber = 0;
 var requestedData;
 var id;
-var domain = 'https://time-radish.glitch.me';
+// var domain = 'https://time-radish.glitch.me';
+var domain = 'gf-mock-reddit.herokuapp.com';
 // var domain = 'http://localhost:3000';
 var body = document.querySelector('body');
 var articleContainer = document.querySelector('.article-container');
