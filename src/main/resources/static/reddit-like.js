@@ -34,6 +34,7 @@ logoutButton.addEventListener('click', function(){
 })
 
 
+
 function getFromServer(callback) {
 	var xhr = new XMLHttpRequest();
 	method = "GET";
@@ -52,6 +53,7 @@ function getFromServer(callback) {
 	}
 	xhr.send();
 }
+
 
 
 function postToServer(givenTitle, givenUrl, callback) {
@@ -75,6 +77,8 @@ function postToServer(givenTitle, givenUrl, callback) {
 	xhr.send(JSON.stringify(data));
 }
 
+
+
 var upVote = function(id, upArrow){
     console.log(id);
     var xhr = new XMLHttpRequest();
@@ -94,6 +98,8 @@ var upVote = function(id, upArrow){
     }
 }
 
+
+
 var downVote = function(id, downArrow){
     var xhr = new XMLHttpRequest();
     var url = domain + '/posts/' + id + '/downvote';
@@ -111,6 +117,8 @@ var downVote = function(id, downArrow){
         }
     }
 }
+
+
 
 var deleteRemove = function(id){
     var xhr = new XMLHttpRequest();
@@ -130,11 +138,14 @@ var deleteRemove = function(id){
 }
 
 
+
 var logoutPage = function(){
 	articleContainer.innerHTML = '';
     newPostBut.style.visibility = 'hidden';
 	logoutButton.style.visibility = 'hidden';
 }
+
+
 
 var postForm = function(){
     
@@ -190,6 +201,73 @@ var postForm = function(){
 	} )
     
     sendPostBut.addEventListener('click', function(){
+        postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
+        postFormContainer.innerHTML = '';
+        newPostBut.style.visibility = 'visible';
+        logoutButton.style.visibility = 'visible';
+    });
+}
+
+
+
+var modifyPost = function(originalTitle, originalUrl, id){
+    
+    articleContainer.innerHTML = '';
+    newPostBut.style.visibility = 'hidden';
+    logoutButton.style.visibility = 'hidden';
+    
+    var newUrlLabel = document.createElement('label');
+    newUrlLabel.setAttribute('class', 'label');
+    newUrlLabel.innerHTML = 'Url';
+    postFormContainer.appendChild(newUrlLabel);
+    
+    var newUrlInput = document.createElement('input');
+    newUrlInput.setAttribute('class', 'input');
+	newUrlInput.value = originalUrl;
+    postFormContainer.appendChild(newUrlInput);
+    
+    var newTitleLabel = document.createElement('label');
+    newTitleLabel.setAttribute('class', 'label');
+    newTitleLabel.innerHTML = 'Title';
+    postFormContainer.appendChild(newTitleLabel);
+    
+    var newTitleInput = document.createElement('input');
+    newTitleInput.setAttribute('class', 'input');
+	newTitleInput.value = originalTitle;
+    postFormContainer.appendChild(newTitleInput);
+    
+    var options = document.createElement('p');
+    options.setAttribute('class', 'label');
+    options.innerHTML = 'options';
+    postFormContainer.appendChild(options);
+    
+    var checkbox = document.createElement('input');
+    checkbox.setAttribute('class', 'check');
+    checkbox.setAttribute('type', 'checkbox');
+    postFormContainer.appendChild(checkbox);
+    
+    var checkboxLabel = document.createElement('label');
+    checkboxLabel.setAttribute('class', 'check-label');
+    checkboxLabel.innerHTML = 'post as anonymous';
+    postFormContainer.appendChild(checkboxLabel);
+    
+    var sendPostBut = document.createElement('button');
+    sendPostBut.setAttribute('class', 'send-post');
+    sendPostBut.innerHTML = 'submit';
+    postFormContainer.appendChild(sendPostBut);
+	
+	newTitleInput.addEventListener('keyup', function(e) {
+	    if (e.keyCode === 13) { 
+			deleteRemove(id); 
+			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
+			postFormContainer.innerHTML = '';
+			newPostBut.style.visibility = 'visible';
+			logoutButton.style.visibility = 'visible';
+	    }
+	} )
+    
+    sendPostBut.addEventListener('click', function(){
+		deleteRemove(id); 
         postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
