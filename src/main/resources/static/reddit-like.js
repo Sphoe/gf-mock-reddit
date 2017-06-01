@@ -206,6 +206,30 @@ var postForm = function(){
     });
 }
 
+var modifyPostServer = function(modifiedTitle, modifiedUrl, originalTime, originalScore, originalOwner, originalId){
+	var xhr = new XMLHttpRequest();
+	method = "POST";
+
+	xhr.open(method, domain + '/posts' + originalId, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+
+	xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200){
+            // var requestedData = JSON.parse(xhr.response);
+            getFromServer(postCreator);
+		}
+	}
+    var data = {
+		id: originalId,
+        title: modifiedTitle,
+        href: modifiedUrl,
+		timestamp: originalTime,
+		score: originalScore,
+		owner: originalOwner
+    }
+	xhr.send(JSON.stringify(data));
+}
 
 
 var modifyPost = function(originalTitle, originalUrl, id){
@@ -257,7 +281,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
 	newTitleInput.addEventListener('keyup', function(e) {
 	    if (e.keyCode === 13) { 
 			// deleteRemove(id); 
-			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
+			modifyPostServer(newTitleInput.value, newUrlInput.value, element.timestamp, element.score, element.owner, element.id);
 			postFormContainer.innerHTML = '';
 			newPostBut.style.visibility = 'visible';
 			logoutButton.style.visibility = 'visible';
@@ -266,7 +290,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
     
     sendPostBut.addEventListener('click', function(){
 		// deleteRemove(id); 
-        postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
+        modifyPostServer(newTitleInput.value, newUrlInput.value, element.timestamp, element.score, element.owner, element.id);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
         logoutButton.style.visibility = 'visible';
