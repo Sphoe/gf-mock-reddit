@@ -226,6 +226,7 @@ var modifyPost = function(title, href, timestamp, score, owner, id){
 		}
 	}
 	var data = {
+		id: id,
 		title: title,
 		href: href,
 		timestamp: timestamp,
