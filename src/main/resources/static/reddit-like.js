@@ -226,12 +226,8 @@ var modifyPost = function(title, href, timestamp, score, owner, id){
 		}
 	}
 	var data = {
-		id: id,
 		title: title,
-		href: href,
-		timestamp: timestamp,
-		score: score,
-		owner: owner
+		href: href
 	}
 	xhr.send(JSON.stringify(data));
 }
