@@ -212,7 +212,7 @@ var postForm = function(){
     });
 }
 
-var modifyPost = function(originalTitle, originalUrlhref, timestamp, score, owner, id){
+var modifyPost = function(originalTitle, originalUrl, timestamp, score, owner, id){
 	var xhr = new XMLHttpRequest();
 	var url = domain + '/posts/' + id;
 	method = 'POST';
