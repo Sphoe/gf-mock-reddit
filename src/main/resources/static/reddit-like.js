@@ -292,7 +292,7 @@ var modifyPostFormCreator = function(originalTitle, originalUrl, originalTime, o
     
     sendPostBut.addEventListener('click', function(){
 		// deleteRemove(id); 
-        postToServer(id, newTitleInput.value, originalUrl, originalTime, originalScore, originalOwner, getFromServer);
+        modifyPost(id, newTitleInput.value, originalUrl, originalTime, originalScore, originalOwner);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
         logoutButton.style.visibility = 'visible';
