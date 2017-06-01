@@ -212,8 +212,7 @@ var postForm = function(){
     });
 }
 
-var modifyPost = function(element, id){
-	console.log(element);
+var modifyPost = function(title, href, timestamp, score, owner, id){
 	var xhr = new XMLHttpRequest();
 	var url = domain + '/posts/' + id;
 	method = 'POST';
@@ -227,7 +226,11 @@ var modifyPost = function(element, id){
 		}
 	}
 	var data = {
-		element: element
+		title: title,
+		href: href,
+		timestamp: timestamp,
+		score: score,
+		owner: owner
 	}
 	xhr.send(JSON.stringify(data));
 }
