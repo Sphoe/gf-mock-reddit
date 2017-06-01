@@ -11,7 +11,7 @@ var newPostBut = document.querySelector('.new-post');
 var logoutButton = document.querySelector('.logout');
 
 
-function lastGetFromServer() {
+function lastGetFromServer(callback) {
 	var xhr = new XMLHttpRequest();
 	method = "GET";
 
@@ -28,9 +28,10 @@ function lastGetFromServer() {
 	// 	}
 	// }
 	xhr.send();
+	callback();
 }
 logoutButton.addEventListener('click', function(){
-	lastGetFromServer();
+	lastGetFromServer(logoutPage);
 })
 
 
