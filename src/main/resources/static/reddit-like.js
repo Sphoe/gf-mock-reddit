@@ -213,6 +213,7 @@ var postForm = function(){
 }
 
 var modifyPost = function(element, id){
+	console.log(element);
 	var xhr = new XMLHttpRequest();
 	var url = domain + '/posts/' + id;
 	method = 'POST';
@@ -227,7 +228,6 @@ var modifyPost = function(element, id){
 	}
 	var data = {
 		element: element
-		console.log(element);
 	}
 	xhr.send(JSON.stringify(data));
 }
