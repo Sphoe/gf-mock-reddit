@@ -38,7 +38,6 @@ public class PostController {
 
   @PostMapping("/posts/{id}")
   public Post modifyPost(@PathVariable long id, @RequestBody Post post) {
-    System.out.println(post.getHref() + post.getTitle() + post.getOwner());
     return postContainer.modify(id, post);
   }
 }

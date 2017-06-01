@@ -1,6 +1,5 @@
-
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
     <meta charset="utf-8"/>
@@ -11,8 +10,9 @@
 <body>
 <div class='post-form-container'></div>
 <div class='header'>
-<button class='new-post'>add new post</button>
-<button class='logout'>logout</button>
+    <button class='new-post'>add new post</button>
+    <button class='logout'>logout</button>
+    <p th:text="${user}"></p>
 </div>
 <div class='article-container'></div>
 <script src="timeago.js"></script>

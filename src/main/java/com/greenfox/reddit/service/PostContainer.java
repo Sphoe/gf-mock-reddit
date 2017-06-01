@@ -91,7 +91,9 @@ public class PostContainer {
 
   public Post modify(long id, Post post) {
     Post modified = postRepository.findOneById(id).modify(post);
-    postRepository.save(modified);
+    if (session.getUserName().equals(postRepository.findOneById(id).getOwner())) {
+      postRepository.save(modified);
+    }
     return modified;
   }
 }
