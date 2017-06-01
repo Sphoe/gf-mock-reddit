@@ -1,8 +1,8 @@
 var classNumber = 0;
 var requestedData;
 var id;
-var domain = 'https://time-radish.glitch.me';
-// var domain = 'https://gf-mock-reddit.herokuapp.com';
+// var domain = 'https://time-radish.glitch.me';
+var domain = 'https://gf-mock-reddit.herokuapp.com';
 // var domain = 'http://localhost:3000';
 var body = document.querySelector('body');
 var articleContainer = document.querySelector('.article-container');
@@ -31,8 +31,12 @@ function lastGetFromServer(callback) {
 	callback();
 }
 logoutButton.addEventListener('click', function(){
-	lastGetFromServer(logoutPage);
+	lastGetFromServer(reloadPage);
 })
+
+var reloadPage = function(){
+	document.location.href = 'file:///D:/greenfox/PamelaPaprasz/week-08/day5/reddit-like.html';
+}
 
 
 
@@ -139,12 +143,12 @@ var deleteRemove = function(id){
 }
 
 
-
-var logoutPage = function(){
-	articleContainer.innerHTML = '';
-    newPostBut.style.visibility = 'hidden';
-	logoutButton.style.visibility = 'hidden';
-}
+// 
+// var logoutPage = function(){
+// 	articleContainer.innerHTML = '';
+//     newPostBut.style.visibility = 'hidden';
+// 	logoutButton.style.visibility = 'hidden';
+// }
 
 
 
