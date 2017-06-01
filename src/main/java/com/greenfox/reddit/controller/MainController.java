@@ -5,6 +5,7 @@ import com.greenfox.reddit.repository.UserRepository;
 import com.greenfox.reddit.service.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -16,8 +17,8 @@ public class MainController {
   UserRepository userRepository;
 
   @GetMapping("/")
-  public String homePage() {
-    return session.loginChecker();
+  public String homePage(Model model) {
+    return session.loginChecker(model);
   }
 
   @PostMapping("/authenticate")
