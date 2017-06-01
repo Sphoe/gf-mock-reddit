@@ -229,7 +229,7 @@ var modifyPost = function(originalTitle, originalUrl, timestamp, score, owner, i
 		title: originalTitle,
 		href: originalUrl
 	}
-	xhr.send(data);
+	xhr.send(JSON.stringify(data));
 }
 
 
