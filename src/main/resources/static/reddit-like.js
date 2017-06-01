@@ -229,7 +229,7 @@ var modifyPostServer = function(modifiedTitle, modifiedUrl, originalId){
 }
 
 
-var modifyPost = function(originalTitle, originalUrl, originalTime, originalScore, originalOwner, id){
+var modifyPost = function(originalTitle, originalUrl, id){
     
     articleContainer.innerHTML = '';
     newPostBut.style.visibility = 'hidden';
