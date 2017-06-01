@@ -85,6 +85,7 @@ function postToServer(givenTitle, givenUrl, callback) {
 
 
 var upVote = function(id, upArrow){
+    console.log(id);
     var xhr = new XMLHttpRequest();
     var url = domain + '/posts/' + id + '/upvote';
     method = 'PUT';
@@ -141,13 +142,6 @@ var deleteRemove = function(id){
     }
 }
 
-
-// 
-// var logoutPage = function(){
-// 	articleContainer.innerHTML = '';
-//     newPostBut.style.visibility = 'hidden';
-// 	logoutButton.style.visibility = 'hidden';
-// }
 
 
 
@@ -212,43 +206,23 @@ var postForm = function(){
     });
 }
 
-var modifyPost = function(originalTitle, originalUrl, timestamp, score, owner, id){
-	var xhr = new XMLHttpRequest();
-	var url = domain + '/posts/' + id;
-	method = 'POST';
-
-	xhr.open(method, url, true);
-	xhr.setRequestHeader('Accept', 'application/json');
-	
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200){
-			getFromServer(postCreator);
-		}
-	}
-	var data = {
-		title: originalTitle,
-		href: originalUrl
-	}
-	xhr.send(JSON.stringify(data));
-}
 
 
-
-var modifyPostFormCreator = function(originalTitle, originalUrl, originalTime, originalScore, originalOwner, id){
+var modifyPost = function(originalTitle, originalUrl, id){
     
     articleContainer.innerHTML = '';
     newPostBut.style.visibility = 'hidden';
     logoutButton.style.visibility = 'hidden';
-    // 
-    // var newUrlLabel = document.createElement('label');
-    // newUrlLabel.setAttribute('class', 'label');
-    // newUrlLabel.innerHTML = 'Url';
-    // postFormContainer.appendChild(newUrlLabel);
-    // 
-    // var newUrlInput = document.createElement('input');
-    // newUrlInput.setAttribute('class', 'input');
-	// newUrlInput.value = originalUrl;
-    // postFormContainer.appendChild(newUrlInput);
+    
+    var newUrlLabel = document.createElement('label');
+    newUrlLabel.setAttribute('class', 'label');
+    newUrlLabel.innerHTML = 'Url';
+    postFormContainer.appendChild(newUrlLabel);
+    
+    var newUrlInput = document.createElement('input');
+    newUrlInput.setAttribute('class', 'input');
+	newUrlInput.value = originalUrl;
+    postFormContainer.appendChild(newUrlInput);
     
     var newTitleLabel = document.createElement('label');
     newTitleLabel.setAttribute('class', 'label');
@@ -282,8 +256,8 @@ var modifyPostFormCreator = function(originalTitle, originalUrl, originalTime, o
 	
 	newTitleInput.addEventListener('keyup', function(e) {
 	    if (e.keyCode === 13) { 
-			// deleteRemove(id); 
-			modifyPost(newTitleInput.value,  originalUrl, originalTime, originalScore, originalOwner, id);
+			deleteRemove(id); 
+			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
 			postFormContainer.innerHTML = '';
 			newPostBut.style.visibility = 'visible';
 			logoutButton.style.visibility = 'visible';
@@ -291,8 +265,8 @@ var modifyPostFormCreator = function(originalTitle, originalUrl, originalTime, o
 	} )
     
     sendPostBut.addEventListener('click', function(){
-		// deleteRemove(id); 
-        modifyPost(newTitleInput.value, originalUrl, originalTime, originalScore, originalOwner, id);
+		deleteRemove(id); 
+        postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
         logoutButton.style.visibility = 'visible';
