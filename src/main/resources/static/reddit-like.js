@@ -1,8 +1,8 @@
 var classNumber = 0;
 var requestedData;
 var id;
-// var domain = 'https://time-radish.glitch.me';
-var domain = 'https://gf-mock-reddit.herokuapp.com';
+var domain = 'https://time-radish.glitch.me';
+// var domain = 'https://gf-mock-reddit.herokuapp.com';
 // var domain = 'http://localhost:3000';
 var body = document.querySelector('body');
 var articleContainer = document.querySelector('.article-container');
@@ -208,72 +208,94 @@ var postForm = function(){
     });
 }
 
-
-
 var modifyPost = function(originalTitle, originalUrl, id){
-    
-    articleContainer.innerHTML = '';
-    newPostBut.style.visibility = 'hidden';
-    logoutButton.style.visibility = 'hidden';
-    
-    var newUrlLabel = document.createElement('label');
-    newUrlLabel.setAttribute('class', 'label');
-    newUrlLabel.innerHTML = 'Url';
-    postFormContainer.appendChild(newUrlLabel);
-    
-    var newUrlInput = document.createElement('input');
-    newUrlInput.setAttribute('class', 'input');
-	newUrlInput.value = originalUrl;
-    postFormContainer.appendChild(newUrlInput);
-    
-    var newTitleLabel = document.createElement('label');
-    newTitleLabel.setAttribute('class', 'label');
-    newTitleLabel.innerHTML = 'Title';
-    postFormContainer.appendChild(newTitleLabel);
-    
-    var newTitleInput = document.createElement('input');
-    newTitleInput.setAttribute('class', 'input');
-	newTitleInput.value = originalTitle;
-    postFormContainer.appendChild(newTitleInput);
-    
-    var options = document.createElement('p');
-    options.setAttribute('class', 'label');
-    options.innerHTML = 'options';
-    postFormContainer.appendChild(options);
-    
-    var checkbox = document.createElement('input');
-    checkbox.setAttribute('class', 'check');
-    checkbox.setAttribute('type', 'checkbox');
-    postFormContainer.appendChild(checkbox);
-    
-    var checkboxLabel = document.createElement('label');
-    checkboxLabel.setAttribute('class', 'check-label');
-    checkboxLabel.innerHTML = 'post as anonymous';
-    postFormContainer.appendChild(checkboxLabel);
-    
-    var sendPostBut = document.createElement('button');
-    sendPostBut.setAttribute('class', 'send-post');
-    sendPostBut.innerHTML = 'submit';
-    postFormContainer.appendChild(sendPostBut);
+	var xhr = new XMLHttpRequest();
+	var url = domain + '/posts/' + id;
+	method = 'POST';
+
+	xhr.open(method, url, true);
+	xhr.setRequestHeader('Accept', 'application/json');
 	
-	newTitleInput.addEventListener('keyup', function(e) {
-	    if (e.keyCode === 13) { 
-			deleteRemove(id); 
-			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
-			postFormContainer.innerHTML = '';
-			newPostBut.style.visibility = 'visible';
-			logoutButton.style.visibility = 'visible';
-	    }
-	} )
-    
-    sendPostBut.addEventListener('click', function(){
-		deleteRemove(id); 
-        postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
-        postFormContainer.innerHTML = '';
-        newPostBut.style.visibility = 'visible';
-        logoutButton.style.visibility = 'visible';
-    });
+	downArrow.setAttribute('src', 'downvoted.png');
+	
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4 && xhr.status === 200){
+			getFromServer(postCreator);
+		}
+	}
+	var data = {
+		title: originalTitle,
+		href: originalUrl
+	}
+	xhr.send(data);
 }
+
+// 
+// 
+// var modifyPost = function(originalTitle, originalUrl, id){
+//     
+//     articleContainer.innerHTML = '';
+//     newPostBut.style.visibility = 'hidden';
+//     logoutButton.style.visibility = 'hidden';
+//     
+//     var newUrlLabel = document.createElement('label');
+//     newUrlLabel.setAttribute('class', 'label');
+//     newUrlLabel.innerHTML = 'Url';
+//     postFormContainer.appendChild(newUrlLabel);
+//     
+//     var newUrlInput = document.createElement('input');
+//     newUrlInput.setAttribute('class', 'input');
+// 	newUrlInput.value = originalUrl;
+//     postFormContainer.appendChild(newUrlInput);
+//     
+//     var newTitleLabel = document.createElement('label');
+//     newTitleLabel.setAttribute('class', 'label');
+//     newTitleLabel.innerHTML = 'Title';
+//     postFormContainer.appendChild(newTitleLabel);
+//     
+//     var newTitleInput = document.createElement('input');
+//     newTitleInput.setAttribute('class', 'input');
+// 	newTitleInput.value = originalTitle;
+//     postFormContainer.appendChild(newTitleInput);
+//     
+//     var options = document.createElement('p');
+//     options.setAttribute('class', 'label');
+//     options.innerHTML = 'options';
+//     postFormContainer.appendChild(options);
+//     
+//     var checkbox = document.createElement('input');
+//     checkbox.setAttribute('class', 'check');
+//     checkbox.setAttribute('type', 'checkbox');
+//     postFormContainer.appendChild(checkbox);
+//     
+//     var checkboxLabel = document.createElement('label');
+//     checkboxLabel.setAttribute('class', 'check-label');
+//     checkboxLabel.innerHTML = 'post as anonymous';
+//     postFormContainer.appendChild(checkboxLabel);
+//     
+//     var sendPostBut = document.createElement('button');
+//     sendPostBut.setAttribute('class', 'send-post');
+//     sendPostBut.innerHTML = 'submit';
+//     postFormContainer.appendChild(sendPostBut);
+// 	
+// 	newTitleInput.addEventListener('keyup', function(e) {
+// 	    if (e.keyCode === 13) { 
+// 			deleteRemove(id); 
+// 			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
+// 			postFormContainer.innerHTML = '';
+// 			newPostBut.style.visibility = 'visible';
+// 			logoutButton.style.visibility = 'visible';
+// 	    }
+// 	} )
+//     
+//     sendPostBut.addEventListener('click', function(){
+// 		deleteRemove(id); 
+//         postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
+//         postFormContainer.innerHTML = '';
+//         newPostBut.style.visibility = 'visible';
+//         logoutButton.style.visibility = 'visible';
+//     });
+// }
 
 newPostBut.addEventListener('click', postForm);
 getFromServer(postCreator);
