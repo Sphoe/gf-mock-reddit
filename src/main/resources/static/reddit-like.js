@@ -232,72 +232,72 @@ var modifyPost = function(originalTitle, originalUrl, timestamp, score, owner, i
 	xhr.send(data);
 }
 
-// 
-// 
-// var modifyPost = function(originalTitle, originalUrl, id){
-//     
-//     articleContainer.innerHTML = '';
-//     newPostBut.style.visibility = 'hidden';
-//     logoutButton.style.visibility = 'hidden';
-//     
-//     var newUrlLabel = document.createElement('label');
-//     newUrlLabel.setAttribute('class', 'label');
-//     newUrlLabel.innerHTML = 'Url';
-//     postFormContainer.appendChild(newUrlLabel);
-//     
-//     var newUrlInput = document.createElement('input');
-//     newUrlInput.setAttribute('class', 'input');
-// 	newUrlInput.value = originalUrl;
-//     postFormContainer.appendChild(newUrlInput);
-//     
-//     var newTitleLabel = document.createElement('label');
-//     newTitleLabel.setAttribute('class', 'label');
-//     newTitleLabel.innerHTML = 'Title';
-//     postFormContainer.appendChild(newTitleLabel);
-//     
-//     var newTitleInput = document.createElement('input');
-//     newTitleInput.setAttribute('class', 'input');
-// 	newTitleInput.value = originalTitle;
-//     postFormContainer.appendChild(newTitleInput);
-//     
-//     var options = document.createElement('p');
-//     options.setAttribute('class', 'label');
-//     options.innerHTML = 'options';
-//     postFormContainer.appendChild(options);
-//     
-//     var checkbox = document.createElement('input');
-//     checkbox.setAttribute('class', 'check');
-//     checkbox.setAttribute('type', 'checkbox');
-//     postFormContainer.appendChild(checkbox);
-//     
-//     var checkboxLabel = document.createElement('label');
-//     checkboxLabel.setAttribute('class', 'check-label');
-//     checkboxLabel.innerHTML = 'post as anonymous';
-//     postFormContainer.appendChild(checkboxLabel);
-//     
-//     var sendPostBut = document.createElement('button');
-//     sendPostBut.setAttribute('class', 'send-post');
-//     sendPostBut.innerHTML = 'submit';
-//     postFormContainer.appendChild(sendPostBut);
-// 	
-// 	newTitleInput.addEventListener('keyup', function(e) {
-// 	    if (e.keyCode === 13) { 
-// 			deleteRemove(id); 
-// 			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
-// 			postFormContainer.innerHTML = '';
-// 			newPostBut.style.visibility = 'visible';
-// 			logoutButton.style.visibility = 'visible';
-// 	    }
-// 	} )
-//     
-//     sendPostBut.addEventListener('click', function(){
-// 		deleteRemove(id); 
-//         postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
-//         postFormContainer.innerHTML = '';
-//         newPostBut.style.visibility = 'visible';
-//         logoutButton.style.visibility = 'visible';
-//     });
-// }
+
+
+var modifyPostFormCreator = function(originalTitle, originalUrl, originalTime, originalScore, originalOwner, id){
+    
+    articleContainer.innerHTML = '';
+    newPostBut.style.visibility = 'hidden';
+    logoutButton.style.visibility = 'hidden';
+    // 
+    // var newUrlLabel = document.createElement('label');
+    // newUrlLabel.setAttribute('class', 'label');
+    // newUrlLabel.innerHTML = 'Url';
+    // postFormContainer.appendChild(newUrlLabel);
+    // 
+    // var newUrlInput = document.createElement('input');
+    // newUrlInput.setAttribute('class', 'input');
+	// newUrlInput.value = originalUrl;
+    // postFormContainer.appendChild(newUrlInput);
+    
+    var newTitleLabel = document.createElement('label');
+    newTitleLabel.setAttribute('class', 'label');
+    newTitleLabel.innerHTML = 'Title';
+    postFormContainer.appendChild(newTitleLabel);
+    
+    var newTitleInput = document.createElement('input');
+    newTitleInput.setAttribute('class', 'input');
+	newTitleInput.value = originalTitle;
+    postFormContainer.appendChild(newTitleInput);
+    
+    var options = document.createElement('p');
+    options.setAttribute('class', 'label');
+    options.innerHTML = 'options';
+    postFormContainer.appendChild(options);
+    
+    var checkbox = document.createElement('input');
+    checkbox.setAttribute('class', 'check');
+    checkbox.setAttribute('type', 'checkbox');
+    postFormContainer.appendChild(checkbox);
+    
+    var checkboxLabel = document.createElement('label');
+    checkboxLabel.setAttribute('class', 'check-label');
+    checkboxLabel.innerHTML = 'post as anonymous';
+    postFormContainer.appendChild(checkboxLabel);
+    
+    var sendPostBut = document.createElement('button');
+    sendPostBut.setAttribute('class', 'send-post');
+    sendPostBut.innerHTML = 'submit';
+    postFormContainer.appendChild(sendPostBut);
+	
+	newTitleInput.addEventListener('keyup', function(e) {
+	    if (e.keyCode === 13) { 
+			// deleteRemove(id); 
+			postToServer(id, newTitleInput.value,  originalUrl, originalTime, originalScore, originalOwner, getFromServer);
+			postFormContainer.innerHTML = '';
+			newPostBut.style.visibility = 'visible';
+			logoutButton.style.visibility = 'visible';
+	    }
+	} )
+    
+    sendPostBut.addEventListener('click', function(){
+		// deleteRemove(id); 
+        postToServer(id, newTitleInput.value, originalUrl, originalTime, originalScore, originalOwner, getFromServer);
+        postFormContainer.innerHTML = '';
+        newPostBut.style.visibility = 'visible';
+        logoutButton.style.visibility = 'visible';
+    });
+}
 
 newPostBut.addEventListener('click', postForm);
 getFromServer(postCreator);
