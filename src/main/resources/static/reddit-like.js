@@ -35,7 +35,7 @@ logoutButton.addEventListener('click', function(){
 })
 
 var reloadPage = function(){
-	document.location.href = 'file:///D:/greenfox/PamelaPaprasz/week-08/day5/reddit-like.html';
+	document.location.href = domain;
 }
 
 
