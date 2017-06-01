@@ -232,7 +232,7 @@ var modifyPostServer = function(modifiedTitle, modifiedUrl, originalTime, origin
 }
 
 
-var modifyPost = function(originalTitle, originalUrl, id){
+var modifyPost = function(originalTitle, originalUrl, originalTime, originalScore, originalOwner, id){
     
     articleContainer.innerHTML = '';
     newPostBut.style.visibility = 'hidden';
@@ -281,7 +281,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
 	newTitleInput.addEventListener('keyup', function(e) {
 	    if (e.keyCode === 13) { 
 			// deleteRemove(id); 
-			modifyPostServer(newTitleInput.value, newUrlInput.value, element.timestamp, element.score, element.owner, element.id);
+			modifyPostServer(newTitleInput.value, newUrlInput.value, originalTime, originalScore, originalOwner, id);
 			postFormContainer.innerHTML = '';
 			newPostBut.style.visibility = 'visible';
 			logoutButton.style.visibility = 'visible';
@@ -290,7 +290,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
     
     sendPostBut.addEventListener('click', function(){
 		// deleteRemove(id); 
-        modifyPostServer(newTitleInput.value, newUrlInput.value, element.timestamp, element.score, element.owner, element.id);
+        modifyPostServer(newTitleInput.value, newUrlInput.value, originalTime, originalScore, originalOwner, id);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
         logoutButton.style.visibility = 'visible';
