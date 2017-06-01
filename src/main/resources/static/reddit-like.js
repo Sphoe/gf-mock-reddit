@@ -206,7 +206,7 @@ var postForm = function(){
     });
 }
 
-var modifyPostServer = function(modifiedTitle, modifiedUrl, originalTime, originalScore, originalOwner, originalId){
+var modifyPostServer = function(modifiedTitle, modifiedUrl, originalId){
 	var xhr = new XMLHttpRequest();
 	method = "POST";
 
@@ -223,10 +223,7 @@ var modifyPostServer = function(modifiedTitle, modifiedUrl, originalTime, origin
     var data = {
 		id: originalId,
         title: modifiedTitle,
-        href: modifiedUrl,
-		timestamp: originalTime,
-		score: originalScore,
-		owner: originalOwner
+        href: modifiedUrl
     }
 	xhr.send(JSON.stringify(data));
 }
@@ -281,7 +278,7 @@ var modifyPost = function(originalTitle, originalUrl, originalTime, originalScor
 	newTitleInput.addEventListener('keyup', function(e) {
 	    if (e.keyCode === 13) { 
 			// deleteRemove(id); 
-			modifyPostServer(newTitleInput.value, newUrlInput.value, originalTime, originalScore, originalOwner, id);
+			modifyPostServer(newTitleInput.value, newUrlInput.value, id);
 			postFormContainer.innerHTML = '';
 			newPostBut.style.visibility = 'visible';
 			logoutButton.style.visibility = 'visible';
@@ -290,7 +287,7 @@ var modifyPost = function(originalTitle, originalUrl, originalTime, originalScor
     
     sendPostBut.addEventListener('click', function(){
 		// deleteRemove(id); 
-        modifyPostServer(newTitleInput.value, newUrlInput.value, originalTime, originalScore, originalOwner, id);
+        modifyPostServer(newTitleInput.value, newUrlInput.value, id);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
         logoutButton.style.visibility = 'visible';
