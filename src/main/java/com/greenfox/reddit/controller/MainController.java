@@ -30,7 +30,7 @@ public class MainController {
     return "redirect:/";
   }
 
-  @GetMapping("logout")
+  @GetMapping("/logout")
   public String logout() {
     session.setAuthenticated(false);
     return "redirect:/";
