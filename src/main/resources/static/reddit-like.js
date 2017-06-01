@@ -212,7 +212,7 @@ var postForm = function(){
     });
 }
 
-var modifyPost = function(title, href, timestamp, score, owner, id){
+var modifyPost = function(originalTitle, originalUrlhref, timestamp, score, owner, id){
 	var xhr = new XMLHttpRequest();
 	var url = domain + '/posts/' + id;
 	method = 'POST';
@@ -226,10 +226,10 @@ var modifyPost = function(title, href, timestamp, score, owner, id){
 		}
 	}
 	var data = {
-		title: title,
-		href: href
+		title: originalTitle,
+		href: originalUrl
 	}
-	xhr.send(JSON.stringify(data));
+	xhr.send(data);
 }
 
 // 
