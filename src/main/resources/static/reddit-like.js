@@ -85,7 +85,6 @@ function postToServer(givenTitle, givenUrl, callback) {
 
 
 var upVote = function(id, upArrow){
-    console.log(id);
     var xhr = new XMLHttpRequest();
     var url = domain + '/posts/' + id + '/upvote';
     method = 'PUT';
@@ -232,7 +231,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
 		title: originalTitle,
 		href: originalUrl
 	}
-	xhr.send(data);
+	xhr.send(JSON.stringify(data));
 }
 
 // 
