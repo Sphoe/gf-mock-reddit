@@ -221,7 +221,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
 	xhr.open(method, url, true);
 	xhr.setRequestHeader('Accept', 'application/json');
 	
-	downArrow.setAttribute('src', 'downvoted.png');
+	// downArrow.setAttribute('src', 'downvoted.png');
 	
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4 && xhr.status === 200){
