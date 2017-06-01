@@ -212,7 +212,7 @@ var postForm = function(){
     });
 }
 
-var modifyPost = function(originalTitle, originalUrl, id){
+var modifyPost = function(element, id){
 	var xhr = new XMLHttpRequest();
 	var url = domain + '/posts/' + id;
 	method = 'POST';
@@ -220,16 +220,13 @@ var modifyPost = function(originalTitle, originalUrl, id){
 	xhr.open(method, url, true);
 	xhr.setRequestHeader('Accept', 'application/json');
 	
-	// downArrow.setAttribute('src', 'downvoted.png');
-	
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4 && xhr.status === 200){
 			getFromServer(postCreator);
 		}
 	}
 	var data = {
-		title: originalTitle,
-		href: originalUrl
+		element: element
 	}
 	xhr.send(JSON.stringify(data));
 }
