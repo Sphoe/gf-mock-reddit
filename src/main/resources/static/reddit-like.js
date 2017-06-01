@@ -256,7 +256,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
 	
 	newTitleInput.addEventListener('keyup', function(e) {
 	    if (e.keyCode === 13) { 
-			deleteRemove(id); 
+			// deleteRemove(id); 
 			postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
 			postFormContainer.innerHTML = '';
 			newPostBut.style.visibility = 'visible';
@@ -265,7 +265,7 @@ var modifyPost = function(originalTitle, originalUrl, id){
 	} )
     
     sendPostBut.addEventListener('click', function(){
-		deleteRemove(id); 
+		// deleteRemove(id); 
         postToServer(newTitleInput.value, newUrlInput.value, getFromServer);
         postFormContainer.innerHTML = '';
         newPostBut.style.visibility = 'visible';
