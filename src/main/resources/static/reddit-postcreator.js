@@ -62,7 +62,7 @@ var postCreator = function(dataFromServer){
         });
         
         modify.addEventListener('click', function(){
-            modifyPost(element.title, element.href, element.timestamp, element.score, element.owner, element.id);
+            modifyPost(element.title, element.href, element.id);
         });
     });
 }
