@@ -210,7 +210,7 @@ var modifyPostServer = function(modifiedTitle, modifiedUrl, originalTime, origin
 	var xhr = new XMLHttpRequest();
 	method = "POST";
 
-	xhr.open(method, domain + '/posts' + originalId, true);
+	xhr.open(method, domain + '/posts/' + originalId, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
 
